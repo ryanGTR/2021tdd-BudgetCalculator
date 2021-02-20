@@ -19,7 +19,7 @@ public class BudgetCalculator  {
     }
 
     public BigDecimal query( LocalDate start, LocalDate end) {
-        BigDecimal decimal=null;
+        BigDecimal decimal= BigDecimal.valueOf(0);
         long monthsBetween = ChronoUnit.MONTHS.between(
                                 start.withDayOfMonth(1),
                                 end.withDayOfMonth(1));
@@ -30,7 +30,8 @@ public class BudgetCalculator  {
         if (monthsBetween >= 1) {
             decimal = count(start, start.withDayOfMonth(start.lengthOfMonth()));
             for (int i = 1; i <  end.getMonthValue() - start.getMonthValue(); i++) {
-                decimal = decimal.add(count(start.plusMonths(i).withDayOfMonth(1), start.plusMonths(i).withDayOfMonth(start.plusMonths(i).lengthOfMonth())));
+                decimal = decimal.add(count(start.plusMonths(i).withDayOfMonth(1),
+                                        start.plusMonths(i).withDayOfMonth(start.plusMonths(i).lengthOfMonth())));
             }
             decimal = decimal.add(count(end.withDayOfMonth(1), end));
         }

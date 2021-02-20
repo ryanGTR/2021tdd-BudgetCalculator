@@ -67,6 +67,13 @@ public class BudgetCalculatorTest {
         budgetShouldBe(BigDecimal.valueOf(31*130), result);
     }
 
+    @Test
+    public void StartDay_biggerThan_EndDay() {
+        BigDecimal result = givenBudgetDateBetween("99990101","20481231");
+        budgetShouldBe(BigDecimal.valueOf(0), result);
+    }
+
+
 
     @Test
     public void StringToLocalDate() {
